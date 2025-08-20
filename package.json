@@ -1,9 +1,10 @@
 {
-  "name": "top-contributor",
-  "displayName": "Top Contributor",
-  "description": "Shows the top contributor and percentage breakdown for the current file",
+  "name": "git-flex",
+  "displayName": "Git Flex",
+  "description": "Top contributor and line % of every author in the current file. Flex responsibly.",
   "version": "0.1.0",
   "publisher": "your-publisher",
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -12,31 +13,31 @@
   ],
   "activationEvents": [
     "workspaceContains:.git",
-    "onCommand:topContributor.showContributors"
+    "onCommand:gitFlex.showContributors"
   ],
   "main": "./out/extension.js",
-  "contributes": {
+  "contributes": {  
     "commands": [
       {
-        "command": "topContributor.showContributors",
+        "command": "gitFlex.showContributors",
         "title": "Show File Contributors"
       }
     ],
     "configuration": {
-      "title": "Top Contributor",
+      "title": "Git Flex",
       "properties": {
-        "topContributor.countMode": {
+        "gitFlex.countMode": {
           "type": "string",
           "default": "lines",
           "enum": ["lines", "characters"],
           "description": "How to count contributions: by lines or characters"
         },
-        "topContributor.ignoreBlankLines": {
+        "gitFlex.ignoreBlankLines": {
           "type": "boolean",
           "default": false,
           "description": "Ignore blank lines when counting contributions"
         },
-        "topContributor.maxFileSizeKB": {
+        "gitFlex.maxFileSizeKB": {
           "type": "number",
           "default": 2048,
           "description": "Maximum file size in KB to analyze (prevents performance issues)"

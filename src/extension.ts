@@ -19,14 +19,14 @@ export function activate(context: vscode.ExtensionContext) {
     cache = new ContributorCache();
 
     // Create status bar item
-    statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-    statusBarItem.command = 'topContributor.showContributors';
-    statusBarItem.text = 'Top: —';
+    statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 10000);
+    statusBarItem.command = 'gitFlex.showContributors';
+    statusBarItem.text = '🏆— —%';
     statusBarItem.tooltip = 'Click to see all contributors';
     statusBarItem.show();
 
     // Register command
-    const showContributorsCommand = vscode.commands.registerCommand('topContributor.showContributors', showContributors);
+    const showContributorsCommand = vscode.commands.registerCommand('gitFlex.showContributors', showContributors);
 
     // Register event listeners
     const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor(handleEditorChange);
@@ -61,7 +61,7 @@ function handleEditorChange(editor: vscode.TextEditor | undefined) {
         if (editor) {
             updateContributors(editor);
         } else {
-            statusBarItem.text = 'Top: —';
+            statusBarItem.text = '🏆— —%';
             statusBarItem.tooltip = 'No active file';
         }
     }, 300);
@@ -82,7 +82,7 @@ async function updateContributors(editor: vscode.TextEditor) {
         const fileContent = editor.document.getText();
         
         // Check file size limit
-        const config = vscode.workspace.getConfiguration('topContributor');
+        const config = vscode.workspace.getConfiguration('gitFlex');
         const maxSizeKB = config.get<number>('maxFileSizeKB', 2048);
         const fileSizeKB = Buffer.byteLength(fileContent, 'utf8') / 1024;
         
@@ -95,8 +95,7 @@ async function updateContributors(editor: vscode.TextEditor) {
         // Check if file is in a git repository
         const isInRepo = await gitRunner.isInGitRepository(filePath);
         if (!isInRepo) {
-            statusBarItem.text = 'Top: No Git';
-            statusBarItem.tooltip = 'File is not in a Git repository';
+            statusBarItem.hide();
             return;
         }
 
@@ -130,13 +129,15 @@ async function updateContributors(editor: vscode.TextEditor) {
 
 function updateStatusBar(contributors: Array<{author: string, lines: number, percentage: number}>) {
     if (contributors.length === 0) {
-        statusBarItem.text = 'Top: No data';
+        statusBarItem.show();
+        statusBarItem.text = '🏆— —%';
         statusBarItem.tooltip = 'No contribution data available';
         return;
     }
 
     const topContributor = contributors[0];
-    statusBarItem.text = `Top: ${topContributor.author} (${topContributor.percentage}%)`;
+    statusBarItem.show();
+    statusBarItem.text = `🏆${topContributor.author} ${topContributor.percentage}%`;
     
     // Create tooltip with top 3 contributors
     const top3 = contributors.slice(0, 3);

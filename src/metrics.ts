@@ -14,7 +14,7 @@ export class MetricsCalculator {
             return [];
         }
 
-        const config = vscode.workspace.getConfiguration('topContributor');
+        const config = vscode.workspace.getConfiguration('gitFlex');
         const countMode = config.get<string>('countMode', 'lines');
         const ignoreBlankLines = config.get<boolean>('ignoreBlankLines', false);
 
@@ -82,7 +82,7 @@ export class MetricsCalculator {
 
     formatContributorSummary(metrics: ContributorMetrics[], maxCount: number = 3): string {
         const top = metrics.slice(0, maxCount);
-        const config = vscode.workspace.getConfiguration('topContributor');
+        const config = vscode.workspace.getConfiguration('gitFlex');
         const countMode = config.get<string>('countMode', 'lines');
         
         const lines = top.map(contributor => {
