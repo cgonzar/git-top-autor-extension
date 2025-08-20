@@ -1,15 +1,9 @@
-# git-extension-test
+# Git Flex
 
-To install dependencies:
+> Totally dumb and simple extension, made just because I wanted to see who really owns the code.
 
-```bash
-bun install
-```
+If you want cool stats about all your coding activity, you should check **[timefly.dev](https://timefly.dev)**.
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.12. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Contact
+- Email: **cgonzar3@gmail.com**
+- LinkedIn: **[linkedin.com/in/cgonzar](https://www.linkedin.com/in/cgonzar/)**
