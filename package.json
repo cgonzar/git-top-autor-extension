@@ -1,0 +1,59 @@
+{
+  "name": "top-contributor",
+  "displayName": "Top Contributor",
+  "description": "Shows the top contributor and percentage breakdown for the current file",
+  "version": "0.1.0",
+  "publisher": "your-publisher",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:.git",
+    "onCommand:topContributor.showContributors"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "topContributor.showContributors",
+        "title": "Show File Contributors"
+      }
+    ],
+    "configuration": {
+      "title": "Top Contributor",
+      "properties": {
+        "topContributor.countMode": {
+          "type": "string",
+          "default": "lines",
+          "enum": ["lines", "characters"],
+          "description": "How to count contributions: by lines or characters"
+        },
+        "topContributor.ignoreBlankLines": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore blank lines when counting contributions"
+        },
+        "topContributor.maxFileSizeKB": {
+          "type": "number",
+          "default": 2048,
+          "description": "Maximum file size in KB to analyze (prevents performance issues)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "bun run compile",
+    "compile": "bunx tsc -p ./",
+    "watch": "bunx tsc -w -p ./",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.9.2"
+  }
+}
