@@ -3,7 +3,7 @@
   "displayName": "Git Flex",
   "description": "Top contributor and line % of every author in the current file. Flex responsibly.",
   "version": "0.1.0",
-  "publisher": "your-publisher",
+  "publisher": "TimeFly",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.74.0"
