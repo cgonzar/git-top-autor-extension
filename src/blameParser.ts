@@ -133,7 +133,7 @@ export class BlameParser {
             const fileLines = fileContent.split('\n');
             for (let i = 0; i < fileLines.length; i++) {
                 result.push({
-                    author: 'You (uncommitted)',
+                    author: 'not commited yet',
                     lineNumber: i + 1,
                     content: fileLines[i]
                 });
@@ -145,6 +145,13 @@ export class BlameParser {
     
     private normalizeAuthor(author: string): string {
         // Remove extra whitespace and normalize
-        return author.trim() || 'Unknown';
+        const normalized = author.trim();
+        if (!normalized) return 'Unknown';
+        const lower = normalized.toLowerCase();
+        // Map common git blame markers for uncommitted/external contents
+        if (lower.includes('not committed yet') || lower.includes('external file')) {
+            return 'not commited yet';
+        }
+        return normalized;
     }
 }

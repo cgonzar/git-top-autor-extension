@@ -2,7 +2,7 @@
   "name": "git-flex",
   "displayName": "Git Flex",
   "description": "Top contributor and line % of every author in the current file. Flex responsibly.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "TimeFly",
   "icon": "images/icon.png",
   "engines": {

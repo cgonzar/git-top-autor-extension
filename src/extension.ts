@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 10000);
     statusBarItem.command = 'gitFlex.showContributors';
-    statusBarItem.text = '🏆— —%';
+    statusBarItem.text = '$(flame)  — —%';
     statusBarItem.tooltip = 'Click to see all contributors';
     statusBarItem.show();
 
@@ -61,7 +61,7 @@ function handleEditorChange(editor: vscode.TextEditor | undefined) {
         if (editor) {
             updateContributors(editor);
         } else {
-            statusBarItem.text = '🏆— —%';
+            statusBarItem.text = '$(flame)  — —%';
             statusBarItem.tooltip = 'No active file';
         }
     }, 300);
@@ -130,14 +130,14 @@ async function updateContributors(editor: vscode.TextEditor) {
 function updateStatusBar(contributors: Array<{author: string, lines: number, percentage: number}>) {
     if (contributors.length === 0) {
         statusBarItem.show();
-        statusBarItem.text = '🏆— —%';
+        statusBarItem.text = '$(flame)  — —%';
         statusBarItem.tooltip = 'No contribution data available';
         return;
     }
 
     const topContributor = contributors[0];
     statusBarItem.show();
-    statusBarItem.text = `🏆${topContributor.author} ${topContributor.percentage}%`;
+    statusBarItem.text = `$(flame) ${topContributor.author} ${topContributor.percentage}%`;
     
     // Create tooltip with top 3 contributors
     const top3 = contributors.slice(0, 3);
